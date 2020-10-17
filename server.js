@@ -12,7 +12,7 @@ const app = express();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads')
+      cb(null, 'public/uploads')
     },
     filename: function (req, file, cb) {
         let name = file.originalname;
@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors());
+
 const port_number = process.env.PORT || 3000;
 app.listen(port_number, ()=>{
     console.log('listening server')
@@ -41,7 +42,7 @@ app.get('/', (req, res)=>{
 app.post('/message', (req, res)=>{
         req.body.date = new Date().toDateString();
         messages.push(req.body);
-        fs.writeFile('visitors_messages.txt', 
+        fs.writeFile('./public/visitors_messages.txt', 
         messages.map(mes=> JSON.stringify(mes, null, '\n')).join('\n'), 
         (er)=> {
             if (er) {
@@ -60,7 +61,7 @@ app.post('/add', upload.array('photos', 5) ,(req, res)=>{
     if (req.files.length){
         const files = req.files;
         fs.writeFile( 
-            `./uploads/${Date.now()}.txt`,
+            `./public/uploads/${Date.now()}.txt`,
             JSON.stringify(req.body, null, '\n'), 
             (er)=> {
                 if (er) {
@@ -71,7 +72,7 @@ app.post('/add', upload.array('photos', 5) ,(req, res)=>{
         res.sendFile('./public/thank_you.html', {root: __dirname});
     } else {
         messages.push(req.body);
-        fs.writeFile('visitors_messages.txt', 
+        fs.writeFile('/public/visitors_messages.txt', 
         messages.map(mes=> JSON.stringify(mes, null, '\n')).join('\n'), 
         (er)=> {
             if (er) {
