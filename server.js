@@ -41,7 +41,7 @@ app.get('/', (req, res)=>{
 app.post('/message', (req, res)=>{
         req.body.date = new Date().toDateString();
         messages.push(req.body);
-        fs.writeFile('visitors_messages', 
+        fs.writeFile('visitors_messages.txt', 
         messages.map(mes=> JSON.stringify(mes, null, '\n')).join('\n'), 
         (er)=> {
             if (er) {
@@ -71,7 +71,7 @@ app.post('/add', upload.array('photos', 5) ,(req, res)=>{
         res.sendFile('./public/thank_you.html', {root: __dirname});
     } else {
         messages.push(req.body);
-        fs.writeFile('visitors_messages', 
+        fs.writeFile('visitors_messages.txt', 
         messages.map(mes=> JSON.stringify(mes, null, '\n')).join('\n'), 
         (er)=> {
             if (er) {
