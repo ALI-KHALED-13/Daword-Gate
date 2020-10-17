@@ -23,7 +23,7 @@ const upload = multer({ storage: storage })
 
 
 
-app.use(express.static('./Public'));
+app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: true}));
 
