@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: true}));
 
 app.use(cors());
-const port_number = server.listen(process.env.PORT || 3000);
+const port_number = process.env.PORT || 3000;
 app.listen(port_number, ()=>{
     console.log('listening server')
 });
