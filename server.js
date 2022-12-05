@@ -30,7 +30,7 @@ const transporter = nodemailer.createTransport({
 
 const options = {
     from: 'daword-gate@outlook.com',
-    to: 'alialtwaff@gmail.com',
+    to: 'aliknake@gmail.com',
 }
 
 
