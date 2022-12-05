@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>options</title>
+    <!--Icon related stuff-->
+	  <link rel="stylesheet" href="styles.css">
+	  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+	  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+	  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+	  <link rel="manifest" href="/site.webmanifest">
+	  <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
+	  <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="theme-color" content="#ffffff">
+      
+    <style>
+        body {
+            padding: 3%;
+        }
+        h2 {
+            width: 90%;
+            color: rgb(58, 57, 57);
+            text-align: right;
+        }
+        section > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }     
+        a {
+            display: inline-block;
+            max-width: 70%;
+            height: 150px;
+            margin: 1%;
+        }
+        a > img {
+            width: 100%;
+            height: 100%;
+        }
+        @media screen and (min-width: 600px) {
+            section > div {flex-direction: row;}
+            a {max-width: 33%;}
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>اختر من الصحف الآتية لتصفحها</h2>
+        <div>
+            <a href="https://sabq.org/topic/%D8%A7%D9%84%D8%AF%D9%88%D8%A7%D8%AF%D9%85%D9%8A" target="_self"> 
+                <img src='images/sapaq.jpg' alt='صحيفة سبق' />
+            </a>
+            <a href="https://twasul.info/tag/%D8%A7%D9%84%D8%AF%D9%88%D8%A7%D8%AF%D9%85%D9%8A/" target="_self"> 
+                <img src='images/twasol.png' alt='صحيفة تواصل الدوادنمي' />
+            </a>
+            <a href="https://slaati.com/tag/%D8%A7%D9%84%D8%AF%D9%88%D8%A7%D8%AF%D9%85%D9%8A" target="_self">
+                <img src='images/sada.png' alt='صحيفة صدى الدوادمي' />
+            </a>
+        </div>
+    </section>
+</body>
+</html>

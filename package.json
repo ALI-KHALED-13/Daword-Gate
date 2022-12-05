@@ -1,0 +1,30 @@
+{
+  "name": "daword",
+  "version": "1.0.0",
+  "description": "''",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.14"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALI-KHALED-13/daword-gate.git"
+  },
+  "keywords": [
+    "city"
+  ],
+  "author": "ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALI-KHALED-13/daword-gate/issues"
+  },
+  "homepage": "https://github.com/ALI-KHALED-13/daword-gate#readme"
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="ar">
+  <head>
+      <meta charset="UTF-8" />
+	  <meta name="description" content="everyone's gate to know more about the city Dwadmi [بوابة الجميع للتعرف على مدينة الدوادمي]" />
+	  <meta name="auther" content="ALI Khaled" />
+	  <meta name="keywords" content="dwadmi, daword, Rhyadah, الدوادمي, الرياض, داورد, دليل, بوابة داورد" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  
+	  <title> أضف للموقع </title>
+	  <!--Icon related stuff-->
+	  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+	  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+	  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+	  <link rel="manifest" href="/site.webmanifest">
+	  <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
+	  <meta name="msapplication-TileColor" content="#da532c">
+	  <meta name="theme-color" content="#ffffff">
+
+	  <link rel="stylesheet" href="styles.css">
+	  <style>
+			article {
+				background-color: rgb(230, 249, 255);
+				padding: 0.5% 1%;
+				border-right: 3px solid rgb(26, 163, 255);
+				margin: 1%;
+				min-height: 80vh;
+				display: grid;
+			}
+				
+			[type=submit] {
+				background-color: rgb(0, 176, 230);
+				color: white;
+				padding: 1.5% 2.5%;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				}
+			[type=submit]:hover {
+				background-color: rgb(0, 137, 179);
+			}
+	  </style>
+   </head>
+   
+   <body>
+	<header>
+		<a href="index.html"><img src="Icons/gate_128.png" alt="logo" /></a>
+		<h1 >بوابة داورد || الدليل الأفضل لمدينة الدوادمي</h1>
+	</header>
+	
+       <nav>
+	  <ul>
+	    <a href="index.html" ><li >الرئيسية</li></a>
+		<a href="history.html"><li>التاريخ</li></a>
+		<a href="dwadmi_news.html"><li> أخبار الدوادمي</li></a>
+		<a href="guid.html"><li>الدليل</li></a>
+		<a href="gallery.html"><li> الألبوم </li></a>
+	  </ul>
+     </nav>
+       <hr>
+	   
+        <article>
+		<form method="post" action="/add" name='addition' enctype="multipart/form-data">
+		   <fieldset >
+		       <legend> أضف للموقع </legend>
+		        <p>
+		           <input type="radio" name="type" value="video/photo" /> 
+			       <lable>فيديو / صورة </lable>                                           
+			        <input type="radio" name="type" value="content" checked/> 	
+                    <lable>محتوى آخر </lable>							
+		        </p>
+			    <p> 
+				   <lable> العمر </lable> 
+                   <select name="age" required >
+						<option value="10-15">10-15</option>
+						<option value="15-20">15-20</option>
+						<option value="20-30">20-30</option>
+						<option value="30-35">30-35</option>
+						<option value="35-45">35-45</option>
+						<option value="45-50">45-50</option>
+						<option value="50-60">50-60</option>
+						<option value="60-65">60-65</option>
+						<option value="> 65">> 65</option>
+				   </select>
+					<lable>  الصفحة المستهدفة: </lable> 
+					<select name="page_name" required >
+						<option value="main">الرئيسية</option>
+						<option value="gallery">الألبوم</option>
+						<option value="guid">الدليل</option>
+						<option value="history">التاريخ</option>
+						<option value="news">الأخبار</option>
+						<option value="news">غير ذلك</option>
+					</select>
+			    </p>
+		         <p>
+                    <input type="text" name="visitorName" placeholder="اكتب اسمك" maxlength="20" required />			  
+		         </p>
+				<p>
+					<input type="email" name="VisitorEmail" 
+					placeholder="بريدك الالكتروني" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+					required />	 
+				</p>
+				<p>
+					<textarea name="describtion" rows="10" cols="55%" required placeholder="وصف المحتوى المراد رفعه"></textarea>	 
+				</p>
+				<input type="file" name="photos" style="cursor: pointer" 
+				multiple accept="image/*, video/*"/>
+				<button type="submit" value="send" target='_blank'> أرسل</button>
+		  </fieldset>
+		</form>
+        </article>  
+
+		<footer>
+			<a href="contact.html" >تواصل معنا</a>  ||  
+			<a href="addition.html" >أضف اقتراحاً</a>
+		</footer>
+	   
+		<script>
+			document.querySelectorAll('[type="radio"]').forEach(rad=> 
+			rad.onchange =()=> {
+				const checkedEl = document.querySelector('[type="radio"]:checked');
+				document.querySelector('[type="file"]').required = 
+				checkedEl.value == 'content'? false : true;
+			});
+		
+		</script>
+       
+   <body>
+   
+   </html>
