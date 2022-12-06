@@ -5,14 +5,13 @@ const nodemailer = require('nodemailer');
 const app = express();
 
 app.use(express.static('./public'));
-app.use(express.static('./uploads'));
 
 app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(formData.parse({uploadDir: './uploads', autoClean: true}))
+app.use(formData.parse({uploadDir: './public/uploads', autoClean: true}))
 
 
 
@@ -78,7 +77,7 @@ app.post('/add', (req, res)=>{
     `;
     mailDetails.attachments = [req.files.media].flat(1).map(fileObj=>{
         return {
-            filename: fileObj.originalname,
+            filename: fileObj.originalFilename,
             path: fileObj.path,
         }
     }); 
