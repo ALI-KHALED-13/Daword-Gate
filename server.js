@@ -1,23 +1,19 @@
 const express = require('express');
-
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const multer = require('multer');
+const formData = require("express-form-data");
 const nodemailer = require('nodemailer');
-const { memoryStorage } = require('multer');
 const app = express();
 
-/* media storage set */
+app.use(express.static('./public'));
+app.use(cors());
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + '-' + file.originalname)
-    }
-  })
-const upload = multer({ storage: storage});
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use(formData.parse({uploadDir: './public/uploads', autoClean: true}))
+
+
+
 
 
 const transporter = nodemailer.createTransport({
@@ -28,17 +24,13 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-const options = {
+const mailDetails = {
     from: 'daword-gate@outlook.com',
     to: 'aliknake@gmail.com',
 }
 
 
-app.use(express.static('./public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.urlencoded({extended: true}));
 
-app.use(cors());
 
 const port_number = process.env.PORT || 3000;
 app.listen(port_number, ()=>{
@@ -51,75 +43,52 @@ app.get('/', (req, res)=>{
 
 
 app.post('/message', (req, res)=>{
-        options.subject = req.body.type;
-        options.text = `
+    mailDetails.subject = req.body.type;
+    mailDetails.text = `
         رسالة من ${req.body.name} عمره ${req.body.age}.
 
         متن الرسالة : 
 
         ${req.body.message}.
         the  sender email is ${req.body.VisitorEmail}
-        `;
-        transporter.sendMail(options, (err, info)=> {
-            if (err){ 
-                console.log(err);
-                res.sendFile('./public/error_message.html', {root: __dirname})
-            } else { 
-                console.log('sent: ' + info.response);
-                res.sendFile('./public/thank_you.html', {root: __dirname});
-            }
-        });
+    `;
+    transporter.sendMail(mailDetails, (err, info)=> {
+        if (err){ 
+            console.log(err);
+            res.sendFile('./public/error_message.html', {root: __dirname})
+        } else { 
+            console.log('sent: ' + info.response);
+            res.sendFile('./public/thank_you.html', {root: __dirname});
+        }
+    });
 });
 
 
-app.post('/add', upload.array('photos', 5) ,(req, res)=>{
-
-    if (req.files.length){
-        options.subject = 'suggestion to add ' + req.body.type + " in " + req.body.page_name;
-        options.text = `
+app.post('/add', (req, res)=>{
+    mailDetails.subject = 'suggestion to add ' + req.body.type + " in " + req.body.page_name;
+    mailDetails.text = `
         أقتراح من ${req.body.visitorName} عمره ${req.body.age}.
 
         وصف المقترح : 
 
         ${req.body.describtion}.
         the  sender email is ${req.body.VisitorEmail}
-        `;
-        options.attachments = req.files.map(fileObj=>{
-            return {
-                filename: fileObj.originalname,
-                path: fileObj.path,
-            }
-        });
-        transporter.sendMail(options, (err, info)=> {
-            if (err){ 
-                console.log(err);
-                res.sendFile('./public/error_message.html', {root: __dirname})
-            } else { 
-                console.log('sent: ' + info.response);
-                res.sendFile('./public/thank_you.html', {root: __dirname});
-            }
-        });
-        
-    } else {
-        options.subject = 'suggestion to add ' + req.body.type + " in " + req.body.page_name;
-        options.text = `
-        أقتراح من ${req.body.visitorName} عمره ${req.body.age}.
+    `;
+    mailDetails.attachments = [req.files.media].flat(1).map(fileObj=>{
+        return {
+            filename: fileObj.originalname,
+            path: fileObj.path,
+        }
+    }); 
 
-        وصف المقترح : 
-
-        ${req.body.describtion}.
-        the  sender email is ${req.body.VisitorEmail}
-        `;
-        transporter.sendMail(options, (err, info)=> {
-            if (err){ 
-                console.log(err);
-                res.sendFile('./public/error_message.html', {root: __dirname})
-            } else { 
-                console.log('sent: ' + info.response);
-                res.sendFile('./public/thank_you.html', {root: __dirname});
-            }
-        });
-        
-    }
+    transporter.sendMail(mailDetails, (err, info)=> {
+        if (err){ 
+            console.log(err);
+            res.sendFile('./public/error_message.html', {root: __dirname})
+        } else { 
+            console.log('sent: ' + info.response);
+            res.sendFile('./public/thank_you.html', {root: __dirname});
+        }
+    });
     
 })
