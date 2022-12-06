@@ -18,15 +18,15 @@ app.use(formData.parse({uploadDir: './public/uploads', autoClean: true}))
 
 
 const transporter = nodemailer.createTransport({
-    service: 'hotmail',
+    service: 'gmail',
     auth: {
-        user: 'daword-gate@outlook.com',
-        pass: 'alialtwaff13',
+        user: 'dawordGate@gmail.com',
+        pass: 'moigabvvtxxdmmny',
     }
 });
 
 const mailDetails = {
-    from: 'daword-gate@outlook.com',
+    from: 'dawordGate@gmail.com',
     to: 'aliknake@gmail.com',
 }
 
