@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(formData.parse({uploadDir: './public/uploads', autoClean: true}))
+app.use("/add", formData.parse({uploadDir: './public/uploads', autoClean: true}))
 
 
 
@@ -44,6 +44,7 @@ app.get('/', (req, res)=>{
 
 
 app.post('/message', (req, res)=>{
+    
     mailDetails.subject = req.body.type;
     mailDetails.text = `
         رسالة من ${req.body.name} عمره ${req.body.age}.
@@ -66,6 +67,7 @@ app.post('/message', (req, res)=>{
 
 
 app.post('/add', (req, res)=>{
+    
     mailDetails.subject = 'suggestion to add ' + req.body.type + " in " + req.body.page_name;
     mailDetails.text = `
         أقتراح من ${req.body.visitorName} عمره ${req.body.age}.
